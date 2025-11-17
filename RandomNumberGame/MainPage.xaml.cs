@@ -7,7 +7,6 @@ namespace RandomNumberGame
         private int randomNumber;
         private int numberOfGuesses;
         private int score = 0;
-        private bool startNewGame = true;
         public MainPage()
         {
             InitializeComponent();
@@ -22,7 +21,7 @@ namespace RandomNumberGame
             int selectedIndex = picker.SelectedIndex;
             if (selectedIndex == -1)
             {
-                GuessNumber.IsEnabled = false;
+
             }
             else if (selectedIndex != -1)
             {
@@ -32,6 +31,8 @@ namespace RandomNumberGame
                     randomNumber = random.Next(1, 10);
                     Debug.WriteLine(randomNumber);
                     GuessNumber.IsEnabled = true;
+                    GuessNumber.IsVisible = true;
+
                 }
                 else if (selectedIndex == 1)
                 {
@@ -39,6 +40,8 @@ namespace RandomNumberGame
                     randomNumber = random.Next(1, 100);
                     Debug.WriteLine(randomNumber);
                     GuessNumber.IsEnabled = true;
+                    GuessNumber.IsVisible = true;
+
                 }
                 else if (selectedIndex == 2)
                 {
@@ -46,6 +49,7 @@ namespace RandomNumberGame
                     randomNumber = random.Next(1, 1000);
                     Debug.WriteLine(randomNumber);
                     GuessNumber.IsEnabled = true;
+                    GuessNumber.IsVisible = true;
 
                 }
             }
@@ -69,23 +73,33 @@ namespace RandomNumberGame
                     score++;
                     Debug.WriteLine(score);
                     numberOfGuesses++;
-                    startNewGame = true;
+                    NewGame.IsVisible = true;
                     NewGame.IsEnabled = true;
+                    right_choice_picture.IsVisible = true;
+                    wrong_choice_picture.IsVisible = false;
+                    GuessNumber.IsEnabled = false;
+                    GuessNumber.IsVisible = false;
+
                 }
                 else if (userInput < randomNumber)
                 {
                     Debug.WriteLine("talet var för litet");
                     numberOfGuesses++;
                     Debug.WriteLine(numberOfGuesses);
-                    startNewGame = true;
-
+                    wrong_choice_picture.IsVisible = true;
+                    right_choice_picture.IsVisible = false;
+                    GuessNumber.IsEnabled = true;
+                    GuessNumber.IsVisible = true;
                 }
                 else
                 {
                     Debug.WriteLine("talet var för stort");
                     numberOfGuesses++;
                     Debug.WriteLine(numberOfGuesses);
-                    startNewGame = true;
+                    wrong_choice_picture.IsVisible = true;
+                    right_choice_picture.IsVisible = false;
+                    GuessNumber.IsEnabled = true;
+                    GuessNumber.IsVisible = true;
                 }
             }
             else
@@ -102,8 +116,11 @@ namespace RandomNumberGame
             //Jag kunde dock inte döpa klassen till NewGame vilket är namnet av knapen.
             //Jag vill att min knap ska sluta fungera när jag inte klarat spelet, och fungera när jag har klarat det.
             {
-                startNewGame = true;
-            }
+            NewGame.IsVisible = false;
+            NewGame.IsEnabled = false;
+            GuessNumber.IsEnabled = true;
+            GuessNumber.IsVisible = true;
+        }
 
         //private void UserNewGame(object? sender, EventArgs e)
         //{

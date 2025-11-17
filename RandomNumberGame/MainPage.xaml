@@ -13,13 +13,29 @@
 
 
 
-            
-                <Label
-                x:Name="Title"
-                Text="Välkommen till mitt numer spel"
-                Style="{StaticResource SubHeadline}"
-                TextColor="HotPink" />
 
+            <Label
+                x:Name="Title"
+                Text="Mitt formidabla, storartade och helt fabulösa numer spel"
+                Style="{StaticResource SubHeadline}"
+                TextColor="LightPink" />
+
+            <Image
+                x:Name="right_choice_picture"
+                Source="you_won_congrats.jpg"
+                Aspect="AspectFill"
+                WidthRequest="400"
+                IsVisible="False"
+                >
+            </Image>
+            
+            <Image
+                x:Name="wrong_choice_picture"
+                Source="wrong_number_buddy.png"
+                Aspect="AspectFit"
+                WidthRequest="200"
+                IsVisible="False">
+            </Image>
 
             <Picker x:Name="DificultySetter"
                     Title="Välj en svårighetsgrad"
@@ -47,13 +63,17 @@
                 x:Name="GuessNumber"
                 Text="Gissa" 
                 Clicked="UserGuess"
-                HorizontalOptions="Fill" />
+                HorizontalOptions="Fill"
+                IsEnabled="False"
+                IsVisible="False"/>
             
                 <Button
                 x:Name="NewGame"
                 Text="Starta en ny omgång"
                 Clicked="UserNewGame"
-                HorizontalOptions="Fill" />
+                HorizontalOptions="Fill" 
+                IsEnabled="False"
+                IsVisible="False"/>
         </VerticalStackLayout>
     </ScrollView>
 
