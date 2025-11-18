@@ -7,6 +7,8 @@ namespace RandomNumberGame
         private int randomNumber;
         private int numberOfGuesses;
         private int score = 0;
+        private int startNewGame = 0;
+
         public MainPage()
         {
             InitializeComponent();
@@ -19,40 +21,51 @@ namespace RandomNumberGame
         {
             var picker = (Picker)sender;
             int selectedIndex = picker.SelectedIndex;
-            if (selectedIndex == -1)
+            //Fick inte while(startNewGame == 0) att funka för att generera ett nytt nummer när man trycker på starta nytt spel kanppen
+            if (selectedIndex != -1 && startNewGame == 0)
             {
+                
+                    if (selectedIndex == 0)
+                    {
+                        Random random = new Random();
+                        randomNumber = random.Next(1, 10);
+                        Debug.WriteLine(randomNumber);
+                        GuessNumber.IsEnabled = true;
+                        GuessNumber.IsVisible = true;
+                        //startNewGame = 1;
+                        //Debug.WriteLine(startNewGame);
+
+
+                    }
+                    else if (selectedIndex == 1)
+                    {
+
+                        Random random = new Random();
+                        randomNumber = random.Next(1, 100);
+                        Debug.WriteLine(randomNumber);
+                        GuessNumber.IsEnabled = true;
+                        GuessNumber.IsVisible = true;
+                        
+
+                    }
+                    else if (selectedIndex == 2)
+                    {
+
+                        Random random = new Random();
+                        randomNumber = random.Next(1, 1000);
+                        Debug.WriteLine(randomNumber);
+                        GuessNumber.IsEnabled = true;
+                        GuessNumber.IsVisible = true;
+                        
+
+                    }
 
             }
-            else if (selectedIndex != -1)
+            else 
             {
-                if (selectedIndex == 0)
-                {
-                    Random random = new Random();
-                    randomNumber = random.Next(1, 10);
-                    Debug.WriteLine(randomNumber);
-                    GuessNumber.IsEnabled = true;
-                    GuessNumber.IsVisible = true;
-
-                }
-                else if (selectedIndex == 1)
-                {
-                    Random random = new Random();
-                    randomNumber = random.Next(1, 100);
-                    Debug.WriteLine(randomNumber);
-                    GuessNumber.IsEnabled = true;
-                    GuessNumber.IsVisible = true;
-
-                }
-                else if (selectedIndex == 2)
-                {
-                    Random random = new Random();
-                    randomNumber = random.Next(1, 1000);
-                    Debug.WriteLine(randomNumber);
-                    GuessNumber.IsEnabled = true;
-                    GuessNumber.IsVisible = true;
-
-                }
+                Debug.WriteLine("test");
             }
+                
         }
 
         private void UserGuess(object? sender, EventArgs e)
@@ -112,15 +125,15 @@ namespace RandomNumberGame
                 //Name.IsEnabled = true; (Knapen vars namn du använde syns)
             }
 
-            private void UserNewGame(object? sender, EventArgs e) //UserNewGame refererar till när jag trycker knapen.
-            //Jag kunde dock inte döpa klassen till NewGame vilket är namnet av knapen.
-            //Jag vill att min knap ska sluta fungera när jag inte klarat spelet, och fungera när jag har klarat det.
+            private void UserNewGame(object? sender, EventArgs e) 
             {
             NewGame.IsVisible = false;
             NewGame.IsEnabled = false;
             GuessNumber.IsEnabled = true;
             GuessNumber.IsVisible = true;
-        }
+            startNewGame = 0;
+            Debug.WriteLine(startNewGame);
+            }
 
         //private void UserNewGame(object? sender, EventArgs e)
         //{
