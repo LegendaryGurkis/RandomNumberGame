@@ -6,14 +6,15 @@ namespace RandomNumberGame
     {
         private int randomNumber;
         private int numberOfGuesses;
-        private int score = 0;
-        private int startNewGame = 0;
+        int score = 0;
+
+
 
         public MainPage()
         {
             InitializeComponent();
 
-            
+            DificultySetter.SelectedIndex = 0;
         }
 
 
@@ -22,50 +23,53 @@ namespace RandomNumberGame
             var picker = (Picker)sender;
             int selectedIndex = picker.SelectedIndex;
             //Fick inte while(startNewGame == 0) att funka för att generera ett nytt nummer när man trycker på starta nytt spel kanppen
-            if (selectedIndex != -1 && startNewGame == 0)
+            if (selectedIndex != -1)
             {
-                
-                    if (selectedIndex == 0)
-                    {
-                        Random random = new Random();
-                        randomNumber = random.Next(1, 10);
-                        Debug.WriteLine(randomNumber);
-                        GuessNumber.IsEnabled = true;
-                        GuessNumber.IsVisible = true;
-                        //startNewGame = 1;
-                        //Debug.WriteLine(startNewGame);
+                if (selectedIndex == 0)
+                {
+                    GuessLable.Text = "Chose a number =)";
+                    GuessNumber.IsEnabled = false;
+                    GuessNumber.IsVisible = false;
+                }
+                if (selectedIndex == 1)
+                {
+                    Random random = new Random();
+                    randomNumber = random.Next(1, 10);
+                    Debug.WriteLine(randomNumber);
+                    GuessNumber.IsEnabled = true;
+                    GuessNumber.IsVisible = true;
+                    GuessLable.Text = ":D";
+
+                }
+                else if (selectedIndex == 2)
+                {
+
+                    Random random = new Random();
+                    randomNumber = random.Next(1, 100);
+                    Debug.WriteLine(randomNumber);
+                    GuessNumber.IsEnabled = true;
+                    GuessNumber.IsVisible = true;
+                    GuessLable.Text = ":D";
 
 
-                    }
-                    else if (selectedIndex == 1)
-                    {
+                }
+                else if (selectedIndex == 3)
+                {
 
-                        Random random = new Random();
-                        randomNumber = random.Next(1, 100);
-                        Debug.WriteLine(randomNumber);
-                        GuessNumber.IsEnabled = true;
-                        GuessNumber.IsVisible = true;
-                        
-
-                    }
-                    else if (selectedIndex == 2)
-                    {
-
-                        Random random = new Random();
-                        randomNumber = random.Next(1, 1000);
-                        Debug.WriteLine(randomNumber);
-                        GuessNumber.IsEnabled = true;
-                        GuessNumber.IsVisible = true;
-                        
-
-                    }
+                    Random random = new Random();
+                    randomNumber = random.Next(1, 1000);
+                    Debug.WriteLine(randomNumber);
+                    GuessNumber.IsEnabled = true;
+                    GuessNumber.IsVisible = true;
+                    GuessLable.Text = ":D";
+                }
 
             }
-            else 
+            else
             {
-                Debug.WriteLine("test");
+
             }
-                
+
         }
 
         private void UserGuess(object? sender, EventArgs e)
@@ -82,7 +86,7 @@ namespace RandomNumberGame
                 // här jämför vi användarens heltal med det slumpade
                 if(randomNumber == userInput)
                 {
-                    Debug.WriteLine("det är korrekt wow");
+                    GuessLable.Text = "det är korrekt wow";
                     score++;
                     Debug.WriteLine(score);
                     numberOfGuesses++;
@@ -92,27 +96,33 @@ namespace RandomNumberGame
                     wrong_choice_picture.IsVisible = false;
                     GuessNumber.IsEnabled = false;
                     GuessNumber.IsVisible = false;
+                    DificultySetter.IsEnabled = false;
+                    ScoreCounter.IsVisible = true;
+                    ScoreCounter.Text = $"score {score}";
 
                 }
                 else if (userInput < randomNumber)
                 {
-                    Debug.WriteLine("talet var för litet");
+                    GuessLable.Text = "talet var för litet";
                     numberOfGuesses++;
                     Debug.WriteLine(numberOfGuesses);
                     wrong_choice_picture.IsVisible = true;
                     right_choice_picture.IsVisible = false;
                     GuessNumber.IsEnabled = true;
                     GuessNumber.IsVisible = true;
+                    DificultySetter.IsEnabled = false;
                 }
                 else
                 {
-                    Debug.WriteLine("talet var för stort");
+                    GuessLable.Text = "talet var för stort";
                     numberOfGuesses++;
                     Debug.WriteLine(numberOfGuesses);
                     wrong_choice_picture.IsVisible = true;
                     right_choice_picture.IsVisible = false;
                     GuessNumber.IsEnabled = true;
                     GuessNumber.IsVisible = true;
+                    DificultySetter.IsEnabled = false;
+
                 }
             }
             else
@@ -131,9 +141,10 @@ namespace RandomNumberGame
             NewGame.IsEnabled = false;
             GuessNumber.IsEnabled = true;
             GuessNumber.IsVisible = true;
-            startNewGame = 0;
-            Debug.WriteLine(startNewGame);
-            }
+            DificultySetter.IsEnabled = true;
+            right_choice_picture.IsVisible = false;
+            DificultySetter.SelectedIndex = 0;
+        }
 
         //private void UserNewGame(object? sender, EventArgs e)
         //{

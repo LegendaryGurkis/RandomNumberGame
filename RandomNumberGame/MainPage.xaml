@@ -18,7 +18,23 @@
                 x:Name="Title"
                 Text="Mitt formidabla, storartade och helt fabulösa numer spel"
                 Style="{StaticResource SubHeadline}"
-                TextColor="LightPink" />
+                TextColor="Pink" />
+
+
+            <Label
+               x:Name="ScoreCounter" 
+                Text="Score Count"
+                Style="{StaticResource SubHeadline}"
+                TextColor="Pink"
+                IsVisible="true"
+                TextTransform="Uppercase"
+                
+                />
+            <Label
+            x:Name="GuessLable"
+            Text="Guess"
+            Style="{StaticResource SubHeadline}"
+            TextColor="WhiteSmoke"/>
 
             <Image
                 x:Name="right_choice_picture"
@@ -39,18 +55,21 @@
 
             <Picker x:Name="DificultySetter"
                     Title="Välj en svårighetsgrad"
-                    SelectedIndexChanged="OnDificultyChanged"
-                    TitleColor="GhostWhite"
-                    BackgroundColor="WhiteSmoke">
+                    SelectedIndexChanged="OnDificultyChanged"             
+                    TitleColor="White"
+                    BackgroundColor="WhiteSmoke"
+                    
+                    >
                 <Picker.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">  
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>¯\_(ツ)_/¯</x:String>
                         <x:String>Enkel</x:String>
                         <x:String>Medel</x:String>
                         <x:String>Svårt</x:String>
                     </x:Array>
                 </Picker.ItemsSource>
             </Picker>
-            
+             
                 <Entry
                 x:Name="UserInputEntry"
                 Placeholder="Välj ett numer att gissa"
